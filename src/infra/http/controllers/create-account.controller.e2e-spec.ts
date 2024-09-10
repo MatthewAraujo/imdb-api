@@ -37,4 +37,22 @@ describe('Create Account (E2E)', () => {
 
 		expect(userOnDatabase).toBeTruthy()
 	})
+	test('[POST] /accounts with image profile', async () => {
+		const response = await request(app.getHttpServer()).post('/accounts').send({
+			name: 'John Doe',
+			email: 'johndoes@example.com',
+			password: '123456',
+			profileImageUrl: 'https://mortified-layer.biz'
+		})
+
+		expect(response.statusCode).toBe(201)
+
+		const userOnDatabase = await prisma.user.findUnique({
+			where: {
+				email: 'johndoe@example.com',
+			},
+		})
+
+		expect(userOnDatabase).toBeTruthy()
+	})
 })

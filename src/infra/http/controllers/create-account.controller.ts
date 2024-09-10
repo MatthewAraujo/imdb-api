@@ -29,7 +29,7 @@ export class CreateAccountController {
 			name,
 			email,
 			password,
-			profileImageUrl: profileImageUrl ? '' : '',
+			profileImageUrl: profileImageUrl ? profileImageUrl : null,
 		})
 
 		if (result.isLeft()) {

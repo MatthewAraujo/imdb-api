@@ -9,7 +9,7 @@ interface RegisterUserUseCaseRequest {
 	name: string
 	email: string
 	password: string
-	profileImageUrl: string
+	profileImageUrl: string | null
 }
 
 type RegisterUserUseCaseResponse = Either<
