@@ -1,23 +1,23 @@
 import { DomainEvents } from '@/core/events/domain-events'
-import type { StudentsRepository } from '@/domain/finder/application/repositories/students-repository'
-import type { Student } from '@/domain/finder/enterprise/entities/student'
+import type { UsersRepository } from '@/domain/imdb/application/repositories/users-repository'
+import type { User } from '@/domain/imdb/enterprise/entities/user'
 
-export class InMemoryStudentsRepository implements StudentsRepository {
-	public items: Student[] = []
+export class InMemoryUsersRepository implements UsersRepository {
+	public items: User[] = []
 
 	async findByEmail(email: string) {
-		const student = this.items.find((item) => item.email === email)
+		const user = this.items.find((item) => item.email === email)
 
-		if (!student) {
+		if (!user) {
 			return null
 		}
 
-		return student
+		return user
 	}
 
-	async create(student: Student) {
-		this.items.push(student)
+	async create(user: User) {
+		this.items.push(user)
 
-		DomainEvents.dispatchEventsForAggregate(student.id)
+		DomainEvents.dispatchEventsForAggregate(user.id)
 	}
 }

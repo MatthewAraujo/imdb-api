@@ -1,14 +1,14 @@
 import { Entity } from '@/core/entities/entity'
 import type { UniqueEntityID } from '@/core/entities/unique-entity-id'
 
-
-export interface StudentProps {
+export interface UserProps {
 	name: string
 	email: string
 	password: string
+	profileImageUrl: string | null
 }
 
-export class Student extends Entity<StudentProps> {
+export class User extends Entity<UserProps> {
 	get name() {
 		return this.props.name
 	}
@@ -17,13 +17,17 @@ export class Student extends Entity<StudentProps> {
 		return this.props.email
 	}
 
+	get profileImageUrl() {
+		return this.props.profileImageUrl
+	}
+
 	get password() {
 		return this.props.password
 	}
 
-	static create(props: StudentProps, id?: UniqueEntityID) {
-		const student = new Student(props, id)
+	static create(props: UserProps, id?: UniqueEntityID) {
+		const user = new User(props, id)
 
-		return student
+		return user
 	}
 }

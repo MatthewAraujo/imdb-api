@@ -1,8 +1,7 @@
-import { Uploader } from '@/domain/finder/application/storage/uploader'
-
+import { Uploader } from '@/domain/imdb/application/storage/uploader'
 import { Module } from '@nestjs/common'
-import { EnvModule } from '../env/env.module'
 import { R2Storage } from './r2-storage'
+import { EnvModule } from '../env/env.module'
 
 @Module({
 	imports: [EnvModule],
@@ -12,7 +11,6 @@ import { R2Storage } from './r2-storage'
 			useClass: R2Storage,
 		},
 	],
-
 	exports: [Uploader],
 })
-export class StorageModule {}
+export class StorageModule { }
