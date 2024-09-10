@@ -1,5 +1,5 @@
 import { randomUUID } from 'node:crypto'
-import type { UploadParams, Uploader } from '@/domain/finder/application/storage/uploader'
+import type { UploadParams, Uploader } from '@/domain/imdb/application/storage/uploader'
 
 interface Upload {
 	fileName: string

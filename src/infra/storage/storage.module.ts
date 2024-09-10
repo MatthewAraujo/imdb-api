@@ -1,4 +1,4 @@
-import { Uploader } from '@/domain/finder/application/storage/uploader'
+import { Uploader } from '@/domain/imdb/application/storage/uploader'
 
 import { Module } from '@nestjs/common'
 import { EnvModule } from '../env/env.module'

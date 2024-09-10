@@ -1,4 +1,4 @@
-import type { Encrypter } from '@/domain/finder/application/cryptography/encrypter'
+import type { Encrypter } from '@/domain/imdb/application/cryptography/encrypter'
 import { Injectable } from '@nestjs/common'
 import type { JwtService } from '@nestjs/jwt'
 
