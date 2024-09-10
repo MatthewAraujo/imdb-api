@@ -1,7 +1,7 @@
-import { hash, compare } from 'bcryptjs'
+import { compare, hash } from 'bcryptjs'
 
-import { HashComparer } from '@/domain/imdb/application/cryptography/hash-comparer'
-import { HashGenerator } from '@/domain/imdb/application/cryptography/hash-generator'
+import type { HashComparer } from '@/domain/imdb/application/cryptography/hash-comparer'
+import type { HashGenerator } from '@/domain/imdb/application/cryptography/hash-generator'
 
 export class BcryptHasher implements HashGenerator, HashComparer {
 	private HASH_SALT_LENGTH = 8

@@ -13,4 +13,4 @@ import { CreateAccountController } from './controllers/create-account.controller
 	controllers: [CreateAccountController, AuthenticateController],
 	providers: [RegisterUserUseCase, AuthenticateUserUseCase],
 })
-export class HttpModule { }
+export class HttpModule {}

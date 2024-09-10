@@ -1,6 +1,6 @@
+import { UsersRepository } from '@/domain/imdb/application/repositories/users-repository'
 import { Module } from '@nestjs/common'
 import { PrismaService } from './prisma/prisma.service'
-import { UsersRepository } from '@/domain/imdb/application/repositories/users-repository'
 import { PrismaUsersRepository } from './prisma/repositories/prisma-users-repository'
 
 @Module({
@@ -13,4 +13,4 @@ import { PrismaUsersRepository } from './prisma/repositories/prisma-users-reposi
 	],
 	exports: [PrismaService, UsersRepository],
 })
-export class DatabaseModule { }
+export class DatabaseModule {}

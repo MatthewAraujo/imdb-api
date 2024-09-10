@@ -1,12 +1,9 @@
-import {
-	UploadParams,
-	Uploader,
-} from '@/domain/imdb/application/storage/uploader'
+import type { UploadParams, Uploader } from '@/domain/imdb/application/storage/uploader'
 
+import { randomUUID } from 'node:crypto'
 import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3'
 import { Injectable } from '@nestjs/common'
-import { EnvService } from '../env/env.service'
-import { randomUUID } from 'node:crypto'
+import type { EnvService } from '../env/env.service'
 
 @Injectable()
 export class R2Storage implements Uploader {
@@ -25,11 +22,7 @@ export class R2Storage implements Uploader {
 		})
 	}
 
-	async upload({
-		fileName,
-		fileType,
-		body,
-	}: UploadParams): Promise<{ url: string }> {
+	async upload({ fileName, fileType, body }: UploadParams): Promise<{ url: string }> {
 		const uploadId = randomUUID()
 		const uniqueFileName = `${uploadId}-${fileName}`
 
