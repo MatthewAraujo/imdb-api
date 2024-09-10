@@ -1,5 +1,5 @@
 import { UserAlreadyExistsError } from '@/domain/imdb/application/use-cases/errors/user-already-exists-error'
-import type { RegisterUserUseCase } from '@/domain/imdb/application/use-cases/register-user'
+import { RegisterUserUseCase } from '@/domain/imdb/application/use-cases/register-user'
 import { Public } from '@/infra/auth/public'
 import {
 	BadRequestException,
@@ -25,7 +25,7 @@ type CreateAccountBodySchema = z.infer<typeof createAccountBodySchema>
 @Controller('/accounts')
 @Public()
 export class CreateAccountController {
-	constructor(private registerUser: RegisterUserUseCase) {}
+	constructor(private registerUser: RegisterUserUseCase) { }
 
 	@Post()
 	@HttpCode(201)

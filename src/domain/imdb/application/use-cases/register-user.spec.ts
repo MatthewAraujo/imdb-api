@@ -1,43 +1,45 @@
 import { FakeHasher } from 'test/cryptography/fake-hasher'
-import { InMemoryStudentsRepository } from 'test/repositories/in-memory-students-repository'
-import { RegisterStudentUseCase } from './register-student'
+import { InMemoryUsersRepository } from 'test/repositories/in-memory-students-repository'
+import { RegisterUserUseCase } from './register-user'
 
-let inMemoryStudentsRepository: InMemoryStudentsRepository
+let inMemoryUsersRepository: InMemoryUsersRepository
 let fakeHasher: FakeHasher
 
-let sut: RegisterStudentUseCase
+let sut: RegisterUserUseCase
 
-describe('Register Student', () => {
+describe('Register User', () => {
 	beforeEach(() => {
-		inMemoryStudentsRepository = new InMemoryStudentsRepository()
+		inMemoryUsersRepository = new InMemoryUsersRepository()
 		fakeHasher = new FakeHasher()
 
-		sut = new RegisterStudentUseCase(inMemoryStudentsRepository, fakeHasher)
+		sut = new RegisterUserUseCase(inMemoryUsersRepository, fakeHasher)
 	})
 
-	it('should be able to register a new student', async () => {
+	it('should be able to register a new user', async () => {
 		const result = await sut.execute({
 			name: 'John Doe',
 			email: 'johndoe@example.com',
 			password: '123456',
+			profileImageUrl: '',
 		})
 
 		expect(result.isRight()).toBe(true)
 		expect(result.value).toEqual({
-			student: inMemoryStudentsRepository.items[0],
+			user: inMemoryUsersRepository.items[0],
 		})
 	})
 
-	it('should hash student password upon registration', async () => {
+	it('should hash user password upon registration', async () => {
 		const result = await sut.execute({
 			name: 'John Doe',
 			email: 'johndoe@example.com',
 			password: '123456',
+			profileImageUrl: '',
 		})
 
 		const hashedPassword = await fakeHasher.hash('123456')
 
 		expect(result.isRight()).toBe(true)
-		expect(inMemoryStudentsRepository.items[0].password).toEqual(hashedPassword)
+		expect(inMemoryUsersRepository.items[0].password).toEqual(hashedPassword)
 	})
 })
