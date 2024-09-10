@@ -1,5 +1,5 @@
-import type { AuthenticateStudentUseCase } from '@/domain/finder/application/use-cases/authenticate-student'
-import { WrongCredentialsError } from '@/domain/finder/application/use-cases/errors/wrong-credentials.error'
+import type { AuthenticateUserUseCase } from '@/domain/imdb/application/use-cases/authenticate-user'
+import { WrongCredentialsError } from '@/domain/imdb/application/use-cases/errors/wrong-credentials.error'
 import { Public } from '@/infra/auth/public'
 import {
 	BadRequestException,
@@ -22,14 +22,14 @@ type AuthenticateBodySchema = z.infer<typeof authenticateBodySchema>
 @Controller('/sessions')
 @Public()
 export class AuthenticateController {
-	constructor(private authenticateStudent: AuthenticateStudentUseCase) {}
+	constructor(private authenticateUser: AuthenticateUserUseCase) { }
 
 	@Post()
 	@UsePipes(new ZodValidationPipe(authenticateBodySchema))
 	async handle(@Body() body: AuthenticateBodySchema) {
 		const { email, password } = body
 
-		const result = await this.authenticateStudent.execute({
+		const result = await this.authenticateUser.execute({
 			email,
 			password,
 		})

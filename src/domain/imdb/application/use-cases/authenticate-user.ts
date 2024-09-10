@@ -2,15 +2,15 @@ import { type Either, left, right } from '@/core/either'
 import { Injectable } from '@nestjs/common'
 import type { Encrypter } from '../cryptography/encrypter'
 import type { HasherCompare } from '../cryptography/hasher-comparer'
-import type { StudentsRepository } from '../repositories/students-repository'
+import type { UsersRepository } from '../repositories/users-repository'
 import { WrongCredentialsError } from './errors/wrong-credentials.error'
 
-interface AuthenticateStudentUseCaseRequest {
+interface AuthenticateUserUseCaseRequest {
 	email: string
 	password: string
 }
 
-type AuthenticateStudentUseCaseResponse = Either<
+type AuthenticateUserUseCaseResponse = Either<
 	WrongCredentialsError,
 	{
 		accessToken: string
@@ -18,9 +18,9 @@ type AuthenticateStudentUseCaseResponse = Either<
 >
 
 @Injectable()
-export class AuthenticateStudentUseCase {
+export class AuthenticateUserUseCase {
 	constructor(
-		private studentsRepository: StudentsRepository,
+		private usersRepository: UsersRepository,
 		private hashComparer: HasherCompare,
 		private encrypter: Encrypter,
 	) {}
@@ -28,21 +28,21 @@ export class AuthenticateStudentUseCase {
 	async execute({
 		email,
 		password,
-	}: AuthenticateStudentUseCaseRequest): Promise<AuthenticateStudentUseCaseResponse> {
-		const student = await this.studentsRepository.findByEmail(email)
+	}: AuthenticateUserUseCaseRequest): Promise<AuthenticateUserUseCaseResponse> {
+		const user = await this.usersRepository.findByEmail(email)
 
-		if (!student) {
+		if (!user) {
 			return left(new WrongCredentialsError())
 		}
 
-		const isPasswordValid = await this.hashComparer.compare(password, student.password)
+		const isPasswordValid = await this.hashComparer.compare(password, user.password)
 
 		if (!isPasswordValid) {
 			return left(new WrongCredentialsError())
 		}
 
 		const accessToken = await this.encrypter.encrypt({
-			sub: student.id.toString(),
+			sub: user.id.toString(),
 		})
 
 		return right({

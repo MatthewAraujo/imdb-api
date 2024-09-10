@@ -1,5 +1,5 @@
-import type { HasherCompare } from '@/domain/finder/application/cryptography/hasher-comparer'
-import type { HasherGenerator } from '@/domain/finder/application/cryptography/hasher-generator'
+import type { HasherCompare } from '@/domain/imdb/application/cryptography/hasher-comparer'
+import type { HasherGenerator } from '@/domain/imdb/application/cryptography/hasher-generator'
 import { compare, hash } from 'bcryptjs'
 
 export class BcryptHasher implements HasherGenerator, HasherCompare {

@@ -1,5 +1,5 @@
-import type { HasherCompare } from '@/domain/finder/application/cryptography/hasher-comparer'
-import type { HasherGenerator } from '@/domain/finder/application/cryptography/hasher-generator'
+import type { HasherCompare } from '@/domain/imdb/application/cryptography/hasher-comparer'
+import type { HasherGenerator } from '@/domain/imdb/application/cryptography/hasher-generator'
 
 export class FakeHasher implements HasherGenerator, HasherCompare {
 	async hash(plain: string): Promise<string> {
