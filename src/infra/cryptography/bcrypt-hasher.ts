@@ -1,8 +1,9 @@
-import type { HasherCompare } from '@/domain/imdb/application/cryptography/hasher-comparer'
-import type { HasherGenerator } from '@/domain/imdb/application/cryptography/hasher-generator'
-import { compare, hash } from 'bcryptjs'
+import { hash, compare } from 'bcryptjs'
 
-export class BcryptHasher implements HasherGenerator, HasherCompare {
+import { HashComparer } from '@/domain/imdb/application/cryptography/hash-comparer'
+import { HashGenerator } from '@/domain/imdb/application/cryptography/hash-generator'
+
+export class BcryptHasher implements HashGenerator, HashComparer {
 	private HASH_SALT_LENGTH = 8
 
 	hash(plain: string): Promise<string> {

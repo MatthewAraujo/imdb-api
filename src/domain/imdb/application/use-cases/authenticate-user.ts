@@ -1,9 +1,9 @@
-import { type Either, left, right } from '@/core/either'
-import { Injectable } from '@nestjs/common'
-import type { Encrypter } from '../cryptography/encrypter'
-import type { HasherCompare } from '../cryptography/hasher-comparer'
-import type { UsersRepository } from '../repositories/users-repository'
-import { WrongCredentialsError } from './errors/wrong-credentials.error'
+import { Either, left, right } from "@/core/either"
+import { Injectable } from "@nestjs/common"
+import { Encrypter } from "../cryptography/encrypter"
+import { UsersRepository } from "../repositories/users-repository"
+import { WrongCredentialsError } from "./errors/wrong-credentials.error"
+import { HashComparer } from "../cryptography/hash-comparer"
 
 interface AuthenticateUserUseCaseRequest {
 	email: string
@@ -21,9 +21,9 @@ type AuthenticateUserUseCaseResponse = Either<
 export class AuthenticateUserUseCase {
 	constructor(
 		private usersRepository: UsersRepository,
-		private hashComparer: HasherCompare,
+		private hashComparer: HashComparer,
 		private encrypter: Encrypter,
-	) {}
+	) { }
 
 	async execute({
 		email,

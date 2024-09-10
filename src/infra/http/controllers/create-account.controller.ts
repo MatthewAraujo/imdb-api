@@ -1,23 +1,15 @@
-import { UserAlreadyExistsError } from '@/domain/imdb/application/use-cases/errors/user-already-exists-error'
-import type { RegisterUserUseCase } from '@/domain/imdb/application/use-cases/register-user'
-import { Public } from '@/infra/auth/public'
-import {
-	BadRequestException,
-	Body,
-	ConflictException,
-	Controller,
-	HttpCode,
-	Post,
-	UsePipes,
-} from '@nestjs/common'
-import { z } from 'zod'
-import { ZodValidationPipe } from '../pipes/zod-validation-pipe'
+import { UserAlreadyExistsError } from "@/domain/imdb/application/use-cases/errors/user-already-exists-error"
+import { RegisterUserUseCase } from "@/domain/imdb/application/use-cases/register-user"
+import { Post, HttpCode, UsePipes, Body, ConflictException, BadRequestException, Controller } from "@nestjs/common"
+import { z } from "zod"
+import { ZodValidationPipe } from "../pipes/zod-validation-pipe"
+import { Public } from "@/infra/auth/public"
 
 const createAccountBodySchema = z.object({
 	name: z.string(),
 	email: z.string().email(),
 	password: z.string(),
-	profileImageUrl: z.string().url()
+	profileImageUrl: z.string().url().optional()
 })
 
 type CreateAccountBodySchema = z.infer<typeof createAccountBodySchema>
@@ -37,7 +29,7 @@ export class CreateAccountController {
 			name,
 			email,
 			password,
-			profileImageUrl,
+			profileImageUrl: profileImageUrl ? '' : '',
 		})
 
 		if (result.isLeft()) {

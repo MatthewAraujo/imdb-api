@@ -1,19 +1,18 @@
-import { Encrypter } from '@/domain/imdb/application/cryptography/encrypter'
-import { HasherCompare } from '@/domain/imdb/application/cryptography/hasher-comparer'
-import { HasherGenerator } from '@/domain/imdb/application/cryptography/hasher-generator'
 import { Module } from '@nestjs/common'
+
+import { Encrypter } from '@/domain/imdb/application/cryptography/encrypter'
+import { HashComparer } from '@/domain/imdb/application/cryptography/hash-comparer'
+import { HashGenerator } from '@/domain/imdb/application/cryptography/hash-generator'
+
+import { JwtEncrypter } from './jwt-encrypter'
 import { BcryptHasher } from './bcrypt-hasher'
-import { JwtEcrypter } from './jwt-encrypter'
 
 @Module({
 	providers: [
-		{
-			provide: Encrypter,
-			useClass: JwtEcrypter,
-		},
-		{ provide: HasherCompare, useClass: BcryptHasher },
-		{ provide: HasherGenerator, useClass: BcryptHasher },
+		{ provide: Encrypter, useClass: JwtEncrypter },
+		{ provide: HashComparer, useClass: BcryptHasher },
+		{ provide: HashGenerator, useClass: BcryptHasher },
 	],
-	exports: [Encrypter, HasherCompare, HasherGenerator],
+	exports: [Encrypter, HashComparer, HashGenerator],
 })
-export class CryptographyModule {}
+export class CryptographyModule { }

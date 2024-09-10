@@ -1,16 +1,9 @@
-import type { AuthenticateUserUseCase } from '@/domain/imdb/application/use-cases/authenticate-user'
-import { WrongCredentialsError } from '@/domain/imdb/application/use-cases/errors/wrong-credentials.error'
-import { Public } from '@/infra/auth/public'
-import {
-	BadRequestException,
-	Body,
-	Controller,
-	Post,
-	UnauthorizedException,
-	UsePipes,
-} from '@nestjs/common'
-import { z } from 'zod'
-import { ZodValidationPipe } from '../pipes/zod-validation-pipe'
+import { AuthenticateUserUseCase } from "@/domain/imdb/application/use-cases/authenticate-user"
+import { WrongCredentialsError } from "@/domain/imdb/application/use-cases/errors/wrong-credentials.error"
+import { Post, UsePipes, Body, UnauthorizedException, BadRequestException, Controller } from "@nestjs/common"
+import { z } from "zod"
+import { ZodValidationPipe } from "../pipes/zod-validation-pipe"
+import { Public } from "@/infra/auth/public"
 
 const authenticateBodySchema = z.object({
 	email: z.string().email(),
