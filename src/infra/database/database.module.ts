@@ -25,4 +25,4 @@ import { PrismaUsersRepository } from './prisma/repositories/prisma-users-reposi
 	],
 	exports: [PrismaService, UsersRepository, SongsRepository, PlaylistsRepository],
 })
-export class DatabaseModule {}
+export class DatabaseModule { }

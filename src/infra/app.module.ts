@@ -16,4 +16,4 @@ import { HttpModule } from './http/http.module'
 		EnvModule,
 	],
 })
-export class AppModule {}
+export class AppModule { }

@@ -23,7 +23,7 @@ export class AuthenticateUserUseCase {
 		private usersRepository: UsersRepository,
 		private hashComparer: HashComparer,
 		private encrypter: Encrypter,
-	) { }
+	) {}
 
 	async execute({
 		email,

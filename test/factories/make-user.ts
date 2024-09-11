@@ -23,7 +23,7 @@ export function makeUser(override: Partial<UserProps> = {}, id?: UniqueEntityID)
 
 @Injectable()
 export class UserFactory {
-	constructor(private prisma: PrismaService) { }
+	constructor(private prisma: PrismaService) {}
 
 	async makePrismaUser(data: Partial<UserProps> = {}): Promise<User> {
 		const user = makeUser(data)

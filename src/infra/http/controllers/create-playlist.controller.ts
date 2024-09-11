@@ -1,19 +1,13 @@
-import {
-	BadRequestException,
-	Body,
-	Controller,
-	Param,
-	Post,
-} from '@nestjs/common'
+import { CreatePlaylistUseCase } from '@/domain/imdb/application/use-cases/register-playlist-use-case'
 import { CurrentUser } from '@/infra/auth/current-user-decorator'
 import { UserPayload } from '@/infra/auth/jwt.strategy'
 import { ZodValidationPipe } from '@/infra/http/pipes/zod-validation-pipe'
+import { BadRequestException, Body, Controller, Param, Post } from '@nestjs/common'
 import { z } from 'zod'
-import { CreatePlaylistUseCase } from '@/domain/imdb/application/use-cases/register-playlist-use-case'
 
 const createplaylistQuestionBodySchema = z.object({
 	name: z.string(),
-	description: z.string().optional()
+	description: z.string().optional(),
 })
 
 const bodyValidationPipe = new ZodValidationPipe(createplaylistQuestionBodySchema)
@@ -32,11 +26,12 @@ export class CreatePlaylistController {
 		const { name, description } = body
 
 		const userId = user.sub
+		console.log(userId)
 
 		const result = await this.createplaylist.execute({
 			name,
 			userId,
-			description: description ? description : null
+			description: description ? description : null,
 		})
 
 		if (result.isLeft()) {

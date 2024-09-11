@@ -6,7 +6,7 @@ import { PrismaService } from '../prisma.service'
 
 @Injectable()
 export class PrismaSongsRepository implements SongsRepository {
-	constructor(private prisma: PrismaService) { }
+	constructor(private prisma: PrismaService) {}
 
 	async findById(spotifySongId: string): Promise<Song | null> {
 		const song = await this.prisma.song.findUnique({
