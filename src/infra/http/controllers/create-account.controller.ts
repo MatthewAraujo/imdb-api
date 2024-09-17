@@ -1,5 +1,5 @@
 import { UserAlreadyExistsError } from '@/domain/imdb/application/use-cases/errors/user-already-exists-error'
-import type { RegisterUserUseCase } from '@/domain/imdb/application/use-cases/register-user'
+import { RegisterUserUseCase } from '@/domain/imdb/application/use-cases/register-user'
 import { Public } from '@/infra/auth/public'
 import {
 	BadRequestException,
@@ -17,7 +17,7 @@ const createAccountBodySchema = z.object({
 	name: z.string(),
 	email: z.string().email(),
 	password: z.string(),
-	profileImageUrl: z.string().url()
+	profileImageUrl: z.string().url().optional(),
 })
 
 type CreateAccountBodySchema = z.infer<typeof createAccountBodySchema>
@@ -37,7 +37,7 @@ export class CreateAccountController {
 			name,
 			email,
 			password,
-			profileImageUrl,
+			profileImageUrl: profileImageUrl ? profileImageUrl : null,
 		})
 
 		if (result.isLeft()) {

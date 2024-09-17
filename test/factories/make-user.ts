@@ -1,8 +1,9 @@
-import type { UniqueEntityID } from '@/core/entities/unique-entity-id'
+import { faker } from '@faker-js/faker'
+
+import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { User, type UserProps } from '@/domain/imdb/enterprise/entities/user'
 import { PrismaUserMapper } from '@/infra/database/prisma/mappers/prisma-user-mapper'
-import type { PrismaService } from '@/infra/database/prisma/prisma.service'
-import { faker } from '@faker-js/faker'
+import { PrismaService } from '@/infra/database/prisma/prisma.service'
 import { Injectable } from '@nestjs/common'
 
 export function makeUser(override: Partial<UserProps> = {}, id?: UniqueEntityID) {

@@ -15,6 +15,9 @@
       "complexity": {
         "noStaticOnlyClass": "off",
         "noThisInStatic": "off"
+      },
+      "style": {
+        "useImportType": "off"
       }
     }
   },
